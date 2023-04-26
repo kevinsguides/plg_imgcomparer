@@ -4,7 +4,7 @@
 A free content plugin that enables basic image comparison slider using a simple shortcode.
 
 
-Made using the [img comparison slider](https://github.com/sneas/img-comparison-slider) library licensed under MIT
+Made using the [image compare viewer](https://github.com/kylewetton/image-compare-viewer) library licensed under MIT
 
 Syntax is like this:
 

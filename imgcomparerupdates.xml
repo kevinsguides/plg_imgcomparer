@@ -1,11 +1,10 @@
 <updates>
-
   <update>
     <name>ImgComparer</name>
     <description></description>
     <element>imgcomparer</element>
     <type>plugin</type>
-    <folder></folder>
+    <folder>content</folder>
     <client>admin</client>
     <version>1.10</version>
     <downloads>

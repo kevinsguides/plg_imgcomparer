@@ -11,7 +11,7 @@
 	<license>GPL</license>
 	<authorEmail>kevin@kevinsguides.com</authorEmail>
 	<authorUrl>www.kevinsguides.com</authorUrl>
-	<version>1.0</version>
+	<version>1.1</version>
 	<!-- you can just type something here, but you should really use language constants -->
 	<description>PLG_CONTENT_IMGCOMPARER_XML_DESC</description>
 	<!-- you must put everything here as it is in your directory/installable zip file or it won't install properly-->

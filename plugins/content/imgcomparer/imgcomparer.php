@@ -1,6 +1,6 @@
 <?php
 // @copyright 2022 Kevin's Guides, Kevin Olson
-// License: MIT
+// @License: GPL 3.0 OR LATER
 
 //kill direct access
 defined('_JEXEC') || die;
@@ -9,17 +9,10 @@ defined('_JEXEC') || die;
 use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\CMS\Factory;
 
-//the class name should be PlgTYPEYourPluginName and it must extend CMSPlugin
-class PlgContentContentPlugDemo extends CMSPlugin
+class PlgContentImgComparer extends CMSPlugin
 {
 
-    //the onContentPrepare happens after Joomla loads the content from the database, but before it reaches the user.
-    //making changes in this file will not affect the original article content at all - it's only changing the output.
-    //$context - article, category, etc. where it's being accessed from
-    //$article - the article object, used to access things like $article->text (all text)
-    //         - you can also try out $article->introtext and $article->fulltext if you use read more breaks
-    //$params  - params from the page/menu item (show title, show tags, link titles, show author, etc...)
-    //$page    - the page # you're on, if on a multi-page article with pagebreaks
+
     public function onContentPrepare($context, &$article, &$params, $page = 0)
     {
 
@@ -35,61 +28,115 @@ class PlgContentContentPlugDemo extends CMSPlugin
         //the current view, if you need it
         $view = JFactory::getApplication()->input->get('view');
 
-        //adding sample styles and scripts
-        //remove comments if you actually want to use
         //$wa->registerAndUseStyle('contentplugdemo.mainstyle',$pluginPath.'/css/style.css');
         //$wa->registerAndUseScript('contentplugdemo.mainscript',$pluginPath.'/js/script.js');
 
-
-        //getting some options from the config
-        $whiteBodybg = $this->params->get('white-body','0');
-        $cardColor = $this->params->get('card-color','bg-dark');
-        
-        //how we handle the card body background color (white or not)
-        //by default, don't change anything
-        $cardBodyClass = '';
-        if($whiteBodybg == '1'){
-            //if 1, change classes
-            $cardBodyClass = 'bg-white text-dark link-dark';
-        }
-
-
-        //find each card based on the RegEx within $article->text and store results in $matches array
-        preg_match_all('/{card.*?\/card}/s', $article->text, $matches);
+        //find each image comparer block based on the RegEx within $article->text and store results in $matches array
+        preg_match_all('/{imgcomparer.*?\/imgcomparer}/s', $article->text, $matches);
 
 
         //for each match in matches[0] - it's a 2d array but the first dimension isn't doing much
         foreach ($matches[0] as $value) {
 
-            //this searches between the card tags to find the body
-            //this would be in group 2 of this match.. see RegEx101.com for more info
-            preg_match('/(?<={card)(.*?})(.*?)(?={\/card})/s', $value, $cardMatcher);
-            //take the second group match - it's the card body between the curly braces of opening and closing {card}{/card}s
-            $cardBody = $cardMatcher[2];
+            $output = '';
 
-            //the first part of the match above contains everything between {card and }, 
-            //so it could be nothing if {card} but it could have attributes, like {card title=''}
-            //Match the title attribute based on the first group in the previous match
-            preg_match('/(?<=title=").*?(?=")/s', $cardMatcher[1], $titleMatch);
+            //find each img tag
+            preg_match_all('/<img.*?\/>/s', $value, $imgMatches);
 
-            //the title is empty until we prove otherwise
-            $title = '';
-            //if this isn't null, the title attribute must be there
-            if ($titleMatch) {
-                //we found the title set by title=""
-                $title = $titleMatch[0];
+            //get the src attribute of the first img tag
+            preg_match('/src="(.*?)"/', $imgMatches[0][0], $img1);
+
+            //get the src attribute of the second img tag
+            preg_match('/src="(.*?)"/', $imgMatches[0][1], $img2);
+
+            //get the alt attribute of the first img tag
+            preg_match('/alt="(.*?)"/', $imgMatches[0][0], $alt1);
+
+            //get the alt attribute of the second img tag
+            preg_match('/alt="(.*?)"/', $imgMatches[0][1], $alt2);
+
+            //get width of first image
+            preg_match('/width="(.*?)"/', $imgMatches[0][0], $width1);
+            //and second
+            preg_match('/width="(.*?)"/', $imgMatches[0][1], $width2);
+
+            //get height of first image
+            preg_match('/height="(.*?)"/', $imgMatches[0][0], $height1);
+            //and second
+            preg_match('/height="(.*?)"/', $imgMatches[0][1], $height2);
+
+
+            //see if the img1 and img2 src attributes are there
+            if (isset($img1[1]) && isset($img2[1])) {
+
+                $img1 = $img1[1];
+                $img2 = $img2[1];
+
+                $wa->registerAndUseScript('imgcomparer-scripts',$pluginPath.'/vendor/image-compare-viewer/image-compare-viewer.min.js');
+                $wa->registerAndUseStyle('imgcomparer-styles',$pluginPath.'/vendor/image-compare-viewer/image-compare-viewer.min.css');
+
+            }
+            else{
+
+                $output = '<strong>ERROR</strong> - img1 or img2 src attribute not found for comparison. Two images are required.';
+                $article->text = str_replace($value, $output, $article->text);
+                return; 
             }
 
-            //generate the output using bootstrap classes and throwing out variables in
-            if ($title == '') {
-                //make a card div with no title
-                $output = '<div class="card '.$cardColor.' text-light"><div class="card-body '.$cardBodyClass.'">'.$cardBody.'</div></div>';
-            } else {
-                //make a card div with a span title and a card body div, remember to close both divs.
-                $output = '<div class="card '.$cardColor.' text-light"><span class="card-header">' .
-                    $title . '</span><div class="card-body '.$cardBodyClass.'">' . $cardBody . '</div></div>';
+            if (isset($alt1[1]))
+            {
+                $alt1 = $alt1[1];
+            }
+            else{
+                $alt1 = '';
             }
 
+            if (isset($alt2[1]))
+            {
+                $alt2 = $alt2[1];
+            }
+            else{
+                $alt2 = '';
+            }
+
+            if (isset($width1[1]))
+            {
+                $width1 = 'width="' . $width1[1] . '"';
+            }
+            else{
+                $width1 = '';
+            }
+
+            if (isset($width2[1]))
+            {
+                $width2 = 'width="' . $width2[1] . '"';
+            }
+            else{
+                $width2 = '';
+            }
+
+            if (isset($height1[1]))
+            {
+                $height1 = 'height="' . $height1[1] . '"';
+            }
+            else{
+                $height1 = '';
+            }
+
+            if (isset($height2[1]))
+            {
+                $height2 = 'height="' . $height2[1] . '"';
+            }
+            else{
+                $height2 = '';
+            }
+
+            // build output
+            $output = '<div class="imgcomparer-container">';
+            $output .= '<img src="' . $img1 . '" alt="' . $alt1 . '" '.$width1.' '.$height1.'>';
+            $output .= '<img src="' . $img2 . '" alt="' . $alt2 . '" '.$width2.' '.$height2.'>';
+            $output .= '</div>';
+ 
             //replace the original card $value with the new $output in article->text
             $article->text = str_replace($value, $output, $article->text);
 

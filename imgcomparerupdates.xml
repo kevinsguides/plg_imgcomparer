@@ -3,7 +3,7 @@
   <update>
     <name>ImgComparer</name>
     <description></description>
-    <element>plg_content_imgcomparer</element>
+    <element>imgcomparer</element>
     <type>plugin</type>
     <folder></folder>
     <client>admin</client>

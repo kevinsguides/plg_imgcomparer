@@ -38,4 +38,8 @@
 	<fields name="params">
 	</fields>
 	</config>
+	
+	<updateservers>
+        <server type="extension" priority="1" name="Auto ScrollSpy">https://raw.githubusercontent.com/kevinsguides/auto-scrollspy/main/autossupdates.xml</server>
+    </updateservers>
 </extension>

@@ -16,6 +16,6 @@
     <maintainerurl>https://kevinsguides.com/</maintainerurl>
     <section>Updates</section>
     <targetplatform name="joomla" version=".*" />
-    <client>administrator</client>
+
   </update>
 </updates>

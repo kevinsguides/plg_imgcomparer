@@ -1,7 +1,10 @@
 <?php
-// @copyright 2022 Kevin's Guides, Kevin Olson
-// @License: GPL 3.0 OR LATER
-
+/* 
+* @license    GNU General Public License version 2 or later; see LICENSE.txt
+* @copyright 2022 Kevin's Guides, Kevin Olson
+* For help visit KevinsGuides.com
+* If you like, please leave a tip. I'm poor. \_(ツ)_/¯
+*/
 //kill direct access
 defined('_JEXEC') || die;
 

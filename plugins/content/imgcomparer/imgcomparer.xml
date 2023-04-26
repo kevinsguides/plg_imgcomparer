@@ -4,6 +4,7 @@
 	<!-- keep format the same, only change the contentplugdemo part if needed-->
 	<name>plg_content_imgcomparer</name>
 	<!-- fill these out however you'd like -->
+	
 	<author>Kevins Guides</author>
 	<creationDate>April 2023</creationDate>
 	<copyright>Copyright (C) 2023 Kevin Olson - Kevin's Guides</copyright>
@@ -15,28 +16,72 @@
 	<description>PLG_CONTENT_IMGCOMPARER_XML_DESC</description>
 	<!-- you must put everything here as it is in your directory/installable zip file or it won't install properly-->
 	<files>
-		<!-- the most important file in the plugin, after this file -->
 		<filename plugin="imgcomparer">imgcomparer.php</filename>
-
-		<!-- just some more notes -->
 		<file>readme.md</file>
-		
-		<!-- the folders, no need to define each file in these folders -->
 		<folder>language</folder>
 		<folder>vendor</folder>
 	</files>
-	<!-- but you do have to define your language files -->
 	<languages folder="language">
-		<!-- the sys.ini file loads the plugin name/desc on all backend panel pages -->
 		<language tag="en-GB">en-GB/en-GB.plg_content_imgcomparer.sys.ini</language>
-		<!-- the regular .ini file loads the constants that appear in the individual plugin settings itself -->
 		<language tag="en-GB">en-GB/en-GB.plg_content_imgcomparer.ini</language>
 	</languages>
-	<!-- the config section is to define the config fields that show in the back-end plugin settings for this plugin-->
+
+
 	<config>
-	<!-- leave the fields line alone -->
-	<fields name="params">
-	</fields>
+		<fields name="params">
+
+			<fieldset name="basic">
+				<field
+				name="slideonhover"
+				type="radio"
+				label="PLG_CONTENT_IMGCOMPARER_SLIDEONHOVER_LABEL"
+				description="PLG_CONTENT_IMGCOMPARER_SLIDEONHOVER_DESC"
+				default="0"
+				>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field
+				name="alwayslabel"
+				type="radio"
+				label="PLG_CONTENT_IMGCOMPARER_ALWAYSLABEL"
+				description="PLG_CONTENT_IMGCOMPARER_ALWAYSLABEL_DESC"
+				default="0"
+				>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field
+				name="notestyles"
+				type="note"
+				label="PLG_CONTENT_IMGCOMPARER_STYLENOTES"
+				/>
+
+				<field
+				name="slidercolor"
+				type="color"
+				default="#ffffff"
+				label="PLG_CONTENT_IMGCOMPARER_SLIDERCOLOR_LABEL"
+				></field>
+
+				<field
+				name="usecircleslider"
+				type="radio"
+				label="PLG_CONTENT_IMGCOMPARER_USECIRCLESLIDER_LABEL"
+				description="PLG_CONTENT_IMGCOMPARER_USECIRCLESLIDER_DESC"
+				default="0"
+				>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+
+				<field
+				type="note"
+				name="notehelp"
+				label="PLG_CONTENT_IMGCOMPARER_GETHELP"
+				/>
+			</fieldset>
+		</fields>
 	</config>
 	
 	<updateservers>

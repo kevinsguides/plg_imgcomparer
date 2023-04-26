@@ -3,8 +3,8 @@
   <update>
     <name>ImgComparer</name>
     <description></description>
-    <element>pkg_autoscrollspy</element>
-    <type>package</type>
+    <element>plg_content_imgcomparer</element>
+    <type>plugin</type>
     <folder></folder>
     <client>admin</client>
     <version>1.00</version>

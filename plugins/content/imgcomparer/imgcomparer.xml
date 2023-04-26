@@ -40,6 +40,6 @@
 	</config>
 	
 	<updateservers>
-        <server type="extension" priority="1" name="Auto ScrollSpy">https://raw.githubusercontent.com/kevinsguides/auto-scrollspy/main/autossupdates.xml</server>
+        <server type="extension" priority="1" name="ImgComparer">https://raw.githubusercontent.com/kevinsguides/plg_imgcomparer/main/imgcomparerupdates.xml</server>
     </updateservers>
 </extension>

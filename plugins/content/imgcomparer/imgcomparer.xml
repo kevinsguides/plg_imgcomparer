@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Leave the following line as-is -->
+<extension version="4.0" type="plugin" group="content" method="upgrade">
+	<!-- keep format the same, only change the contentplugdemo part if needed-->
+	<name>plg_content_contentplugdemo</name>
+	<!-- fill these out however you'd like -->
+	<author>Kevins Guides</author>
+	<creationDate>Nov 2022</creationDate>
+	<copyright>Copyright (C) 2022 Kevin Olson - Kevin's Guides</copyright>
+	<license>MIT</license>
+	<authorEmail>youremail@yoursite.com</authorEmail>
+	<authorUrl>www.kevinsguides.com</authorUrl>
+	<version>0.01</version>
+	<!-- you can just type something here, but you should really use language constants -->
+	<description>PLG_CONTENT_CONTENTPLUGDEMO_XML_DESCRIPTION</description>
+	<!-- you must put everything here as it is in your directory/installable zip file or it won't install properly-->
+	<files>
+		<!-- the most important file in the plugin, after this file -->
+		<filename plugin="contentplugdemo">contentplugdemo.php</filename>
+
+		<!-- just some more notes -->
+		<file>readme.md</file>
+		
+		<!-- the folders, no need to define each file in these folders -->
+		<folder>language</folder>
+		<folder>css</folder>
+		<folder>js</folder>
+	</files>
+	<!-- but you do have to define your language files -->
+	<languages folder="language">
+		<!-- the sys.ini file loads the plugin name/desc on all backend panel pages -->
+		<language tag="en-GB">en-GB/en-GB.plg_content_contentplugdemo.sys.ini</language>
+		<!-- the regular .ini file loads the constants that appear in the individual plugin settings itself -->
+		<language tag="en-GB">en-GB/en-GB.plg_content_contentplugdemo.ini</language>
+	</languages>
+	<!-- the config section is to define the config fields that show in the back-end plugin settings for this plugin-->
+	<config>
+	<!-- leave the fields line alone -->
+	<fields name="params">
+		<!-- use fieldset name="basic" for most purposes, create a separate fieldset "advanced" if you want a second tab with more settings-->
+		<fieldset name="basic">
+			<!-- the field that makes body of cards white in my examples-->
+			<field name="white-body"
+				type="radio"
+				default="0"
+				label="PLG_CONTENT_CONTENTPLUGDEMO_WHITECARDBODY"
+				description=""
+				class="btn-group btn-group-yesno"
+			>
+				<option value="1">JYES</option>
+				<option value="0">JNO</option>
+			</field>
+			<!-- the field that changes card color in my examples -->
+			<field name="card-color"
+				type="list"
+				default="bg-dark"
+				label="PLG_CONTENT_CONTENTPLUGDEMO_CARDBGCOLOR"
+				description=""
+				>
+				<option value="bg-dark">PLG_CONTENT_CONTENTPLUGDEMO_CARDBGCOLOR_DARK</option>
+				<option value="bg-danger">PLG_CONTENT_CONTENTPLUGDEMO_CARDBGCOLOR_DANGER</option>
+				<option value="bg-primary">PLG_CONTENT_CONTENTPLUGDEMO_CARDBGCOLOR_PRIMARY</option>
+				</field>
+		</fieldset>
+	</fields>
+	</config>
+</extension>
+

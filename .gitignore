@@ -1,0 +1,11 @@
+*
+*/
+!.gitignore
+!plugins/
+!imgcomparerupdates.xml
+!readme.md
+plugins/content
+plugins/content/imgcomparer
+!plugins/content/imgcomparer/**
+
+

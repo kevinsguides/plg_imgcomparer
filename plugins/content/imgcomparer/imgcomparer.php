@@ -175,7 +175,7 @@ class PlgContentImgComparer extends CMSPlugin
                 '.$vertical.'
                 }';
 
-
+                
                 $wa->addInlineScript('
                 document.addEventListener("DOMContentLoaded", function(event) {
                     '.$optionsconst.'

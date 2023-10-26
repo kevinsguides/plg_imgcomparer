@@ -11,13 +11,26 @@ defined('_JEXEC') || die;
 //required to make the plugin work
 use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Language;
+use Joomla\CMS\Language\Text;
 
 class PlgContentImgComparer extends CMSPlugin
 {
 
+    //load the language file
+    public function __construct(&$subject, $config)
+    {
+        parent::__construct($subject, $config);
+
+        $language = Factory::getApplication()->getLanguage();
+        $language->load('plg_content_imgcomparer', JPATH_ADMINISTRATOR);
+        
+    }
+
 
     public function onContentPrepare($context, &$article, &$params, $page = 0)
     {
+
 
         //getters
         $doc = Factory::getApplication()->getDocument();
@@ -26,7 +39,7 @@ class PlgContentImgComparer extends CMSPlugin
         //in case you need it, the path to this plugin
         $pluginPath = 'plugins/content/' . $this->_name;
         //the current view, if you need it
-        $view = JFactory::getApplication()->input->get('view');
+        $view = Factory::getApplication()->input->get('view');
 
 
         if($this->params->get('slideonhover', 0) == 1){
@@ -56,19 +69,22 @@ class PlgContentImgComparer extends CMSPlugin
 
         preg_match_all('/{imgcomparer.*?\/imgcomparer}/s', $article->text, $matches);
 
+
+
         //for each match in matches[0] - it's a 2d array but the first dimension isn't doing much
         foreach ($matches[0] as $value) {
 
             $output = '';
 
             //find each img tag
-            preg_match_all('/<img.*?\/>/s', $value, $imgMatches);
+            preg_match_all('/<img.*?>/s', $value, $imgMatches);
+            
 
+            
             //skip this loop iteration if there are not exactly 2 img tags
             if (count($imgMatches[0]) != 2) {
-                $output = '<p style="color:red;">ERROR: Image Compare Viewer requires exactly 2 images. Please check your code/editor.</p>';
+                $output = '<p style="color:red;">'.Text::_('PLG_CONTENT_IMGCOMPARER_NEEDS_2_IMGS').'</p>';
                 $article->text = str_replace($value, $output, $article->text);
-
                 continue;
             }
 

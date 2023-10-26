@@ -11,19 +11,18 @@
 	<license>GPL</license>
 	<authorEmail>kevin@kevinsguides.com</authorEmail>
 	<authorUrl>www.kevinsguides.com</authorUrl>
-	<version>1.11</version>
+	<version>1.25</version>
 	<!-- you can just type something here, but you should really use language constants -->
 	<description>PLG_CONTENT_IMGCOMPARER_XML_DESC</description>
 	<!-- you must put everything here as it is in your directory/installable zip file or it won't install properly-->
 	<files>
 		<filename plugin="imgcomparer">imgcomparer.php</filename>
 		<file>readme.md</file>
-		<folder>language</folder>
 		<folder>vendor</folder>
 	</files>
 	<languages folder="language">
-		<language tag="en-GB">en-GB/en-GB.plg_content_imgcomparer.sys.ini</language>
-		<language tag="en-GB">en-GB/en-GB.plg_content_imgcomparer.ini</language>
+		<language tag="en-GB">en-GB/plg_content_imgcomparer.sys.ini</language>
+		<language tag="en-GB">en-GB/plg_content_imgcomparer.ini</language>
 	</languages>
 
 

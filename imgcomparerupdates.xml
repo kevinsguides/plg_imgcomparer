@@ -4,11 +4,11 @@
     <description>A free content plugin to compare images with a moving reveal slider</description>
     <element>imgcomparer</element>
     <type>plugin</type>
-    <version>1.11</version>
+    <version>1.25</version>
     <folder>content</folder>
     <client>site</client>
     <downloads>
-      <downloadurl type="full" format="zip">https://github.com/kevinsguides/plg_imgcomparer/releases/download/v1.11/plg_content_imgcomparer_1.11.zip</downloadurl>
+      <downloadurl type="full" format="zip">https://github.com/kevinsguides/plg_imgcomparer/releases/download/v1.25/plg_content_imgcomparer_1.25.zip</downloadurl>
     </downloads>
     <tags>
       <tag>stable</tag>
